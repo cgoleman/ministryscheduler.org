@@ -1,0 +1,55 @@
+<?php $this->headTitle()->append('Assignment'); ?>
+
+<p><a href="<?php echo $this->url(
+    array(
+        'controller' => 'assignment',
+        'action'     => 'add'
+    ),
+    'default',
+    true) ?>">Create New Assignment</a></p>
+
+<div id="form">
+My Assignments: <br />
+<table class="tblList">
+	<tr>
+		<th width="25%">Title</th>
+		<th width="30%">Description</th>
+		<th width="20%">Created</th>
+		<th width="25%"></th>
+	</tr>
+    <?php 
+    	foreach ($this->entries as $entry):
+    		$shared_action = 'share';
+    		if ($entry->shared == 1) { $shared_action = 'unshare'; }?>
+    <tr>
+    	<td width="25%"><?php echo $this->escape($entry->title) ?></td>
+    	<td width="30%"><?php echo $this->truncate($entry->description, 0, 45, '...') ?></td>
+    	<td width="20%"><?php echo $this->escape($entry->created) ?></td>
+    	<td width="25%">view&nbsp;|&nbsp;<a href="<?php echo $this->url(
+    			array(
+		        'controller' => 'assignment',
+		        'action'     => 'edit',
+		    	'id'		 => $entry->id
+			    ),
+			    'default',
+			    true) ?>">edit</a>&nbsp;|&nbsp;
+			    assign&nbsp;|&nbsp;
+			    responses&nbsp;|&nbsp;<a href="<?php echo $this->url(
+    			array(
+		        'controller' => 'assignment',
+		        'action'     => $shared_action,
+		    	'id'		 => $entry->id
+			    ),
+			    'default',
+			    true)?>"><?php echo $shared_action?></a>&nbsp;|&nbsp;<a href="<?php echo $this->url(
+			    array(
+			        'controller' => 'assignment',
+			        'action'     => 'delete',
+			    	'id'		 => $entry->id
+			    ),
+			    'default',
+			    true) ?>">delete</a></td>
+    </tr>
+    <?php endforeach ?>
+</table>
+</div>

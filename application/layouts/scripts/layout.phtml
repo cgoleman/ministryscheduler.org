@@ -1,0 +1,35 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+  <?php echo $this->headTitle() ?>
+  <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/global.css') ?>
+  <?php echo $this->dojo() ?>
+</head>
+<body class="cairo">
+<div id="header" style="background-color: #EEEEEE; height: 60px;">
+    <div id="header-logo" style="float: left">
+        <b>Ministry Scheduler</b>
+    </div>
+    <div id="header-login">
+        <a href="<?php 
+        	if ($this->loggedIn == 0) {
+        		echo $this->url(array('controller'=>'login'),'default',true);
+        		$linkText = "Login";
+            } else {
+          		echo $this->url(array('controller'=>'logout'),'default',true);
+          		$linkText = "Logout";
+            }?>"><?php echo $linkText ?></a>
+    </div>
+    <div id="header-menu">
+        <?php if ($this->loggedIn == 1) {
+        		echo $this->partial('userMenu.phtml');
+        }
+       	?>
+    </div>
+</div>
+
+<?php echo $this->layout()->content; ?>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?php $this->headTitle()->append('Delete Class'); ?>
+
+Delete class:<br/>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<p class="warning">Are you sure that you want to delete class: <?php echo $this->escape($this->class->title); ?>?</p>
+	<div class="buttons">
+		<input type="hidden" name="id" value="<?php echo $this->escape($this->class->id); ?>" />
+		<input type="submit" name="delete" id="leftButton" value="Yes" />&nbsp;<input type="submit" id="rightButton" name="delete" value="No" />
+	</div>
+</form>
